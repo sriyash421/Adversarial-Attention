@@ -4,7 +4,7 @@ from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize
 
 # nltk.download('punkt')
-class dataset:
+class LoadData:
     def __init__(self, PATH):
         # self.vocab = pickle.load(PATH, 'rb') #data structure to be decided
         self.train, self.dev, self.test, self.vocab = self.load_corpus(PATH)
@@ -66,4 +66,4 @@ class dataset:
         self.train, self.dev, self.test = self.text_target(self.train_dl), self.text_target(self.dev_dl), self.text_target(self.test_dl)
         return self.train, self.dev, self.test, self.vocab
 
-d = dataset('/home/atharva/NLP/EmoBank/corpus/emobank.csv')
+d = LoadData('./data/emobank.csv')
