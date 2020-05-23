@@ -39,8 +39,11 @@ class LoadData:
         for x in sentence.lower(): 
             if x in punctuations: 
                 sentence = sentence.replace(x, "") 
-        sentence = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', sentence) #remove urls
-        string = ''.join(i for i in sentence if ord(i)<128) #remove non unicode characters
+        # sentence = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', sentence) #remove urls
+        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', string)
+        for url in urls: string = string.replace(url,'')
+        string = string.encode('ascii', 'ignore').decode('ascii') #better for removing non unicode characters
+        # string = ''.join(i for i in sentence if ord(i)<128) #remove non unicode characters
         words = [word for word in word_tokenize(sentence) ] #### TODO Class importing pe load hoga kya, if word_tokenize is not imported
         # for i in range(len(words)): words[i] = self.ps.stem(words[i])
         return words
