@@ -11,11 +11,12 @@ class Attention(nn.Module):
 
     def forward(self, x, source_lengths):
         hidden_states, _ = self.model(x)
-        enc_masks = torch.zeros_like(hidden_states, dtype=torch.uint8)
+        hidden_states = hidden_states.squeeze()
+        enc_masks = torch.zeros_like(hidden_states, dtype=torch.bool)
         for i in range(len(source_lengths)) :
-            enc_masks[i][:source_lengths[i]][0] = 1
+            enc_masks[i,:source_lengths[i]] = 1
         hidden_states.data.masked_fill_(enc_masks, -float('inf'))
-        attention = self.softmax(hidden_states.squeeze())
+        attention = self.softmax(hidden_states)
         diag = torch.stack([torch.diag(attention[i])
                             for i in range(attention.shape[0])], dim=0)
         x = torch.bmm(diag, x)
@@ -37,9 +38,9 @@ class FeatureExtaction(nn.Module):
 
     def forward(self, x, source_lengths):
         hidden_states, _ = self.model(x)
-        h_k = torch.stack([hidden_states[i][source_lengths[i]-1][:]
+        h_k = torch.stack([hidden_states[i,source_lengths[i]-1,:]
                             for i in range(hidden_states.shape[0])], dim=0)
-        hidden_states = torch.stack([(hidden_states[i][:source_lengths[i]][:]).mean(dim=0)
+        hidden_states = torch.stack([(hidden_states[i,:source_lengths[i],:]).mean(dim=0)
                                       for i in range(hidden_states.size(0))], dim=0)
         features = self.tanh(torch.cat((hidden_states, h_k), dim=1))
         return features
