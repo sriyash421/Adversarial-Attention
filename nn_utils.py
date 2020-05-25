@@ -1,20 +1,20 @@
 import torch
 import torch.nn as nn
-
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 class Attention(nn.Module):
     def __init__(self, embed_size=300, hidden_size=1):
         super(Attention, self).__init__()
         self.model = nn.LSTM(embed_size, hidden_size,
-                             bidirectional=False, batch_first=True)
+                             bidirectional=False, batch_first=True, bias=False)
         self.softmax = nn.Softmax(dim=1)
 
     def forward(self, x, source_lengths):
         hidden_states, _ = self.model(x)
         hidden_states = hidden_states.squeeze()
-        enc_masks = torch.zeros_like(hidden_states, dtype=torch.bool)
+        enc_masks = torch.ones(hidden_states.shape, dtype=torch.bool).detach().to(device)
         for i in range(len(source_lengths)) :
-            enc_masks[i,:source_lengths[i]] = 1
+            enc_masks[i,:source_lengths[i]] = 0
         hidden_states.data.masked_fill_(enc_masks, -float('inf'))
         attention = self.softmax(hidden_states)
         diag = torch.stack([torch.diag(attention[i])
@@ -33,7 +33,7 @@ class FeatureExtaction(nn.Module):
     def __init__(self, embed_size=300, hidden_size=150):
         super(FeatureExtaction, self).__init__()
         self.model = nn.LSTM(embed_size, hidden_size,
-                             bidirectional=True, batch_first=True)
+                             bidirectional=True, batch_first=True, bias=False)
         self.tanh = nn.Tanh()
 
     def forward(self, x, source_lengths):
