@@ -29,7 +29,7 @@ class Dataset() :
         return max(lengths), lengths
         
     def get_tokens(self, sentences): #here the sentences object is list of texts, pad is the pad token TODO: decide on a pad token
-        sentences = [word_tokenize(str(sent)) for sent in sentences]
+        sentences = [sent.split(' ') for sent in sentences]
         maxlen, lengths = self.max_length(sentences)
         for i in trange(len(sentences)) :
             sentences[i] += ['<pad>']*(maxlen-lengths[i])
@@ -58,19 +58,13 @@ class Dataset() :
         return embeddings
 
 
-dataset = Dataset()
-vocab = dataset.get_vocab()
-train_dataset = dataset.read_data('./data/train.csv') 
-dev_dataset = dataset.read_data('./data/dev.csv')
-test_dataset = dataset.read_data('./data/test.csv')
+# temp = {
+#     'vocab' : vocab,
+#     'train_dataset': train_dataset,
+#     'dev_dataset': dev_dataset,
+#     'test_dataset': test_dataset
+# }
 
-temp = {
-    'vocab' : vocab,
-    'train_dataset': train_dataset,
-    'dev_dataset': dev_dataset,
-    'test_dataset': test_dataset
-}
-
-with open("dataset.pkl", "wb") as fout :
-    pickle.dump(temp, fout)
+# with open("dataset.pkl", "wb") as fout :
+#     pickle.dump(temp, fout)
         

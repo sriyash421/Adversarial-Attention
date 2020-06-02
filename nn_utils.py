@@ -6,13 +6,13 @@ class Attention(nn.Module):
     def __init__(self, embed_size=300, hidden_size=1):
         super(Attention, self).__init__()
         self.model = nn.LSTM(embed_size, hidden_size,
-                             bidirectional=False, batch_first=True, bias=False)
+                             bidirectional=True, batch_first=True, bias=False)
         self.softmax = nn.Softmax(dim=1)
 
     def forward(self, x, source_lengths):
         hidden_states, _ = self.model(x)
-        hidden_states = hidden_states.squeeze()
-        enc_masks = torch.ones(hidden_states.shape, dtype=torch.bool).detach().to(device)
+        hidden_states = hidden_states.mean(dim=-1).squeeze()
+        enc_masks = torch.ones_like(hidden_states, dtype=torch.bool).to(device)
         for i in range(len(source_lengths)) :
             enc_masks[i,:source_lengths[i]] = 0
         hidden_states.data.masked_fill_(enc_masks, -float('inf'))

@@ -34,24 +34,18 @@ class LoadData:
         return train, dev, test
 
     def tokenize(self, sentence): #tokenize a sentence supplied as a string and get list of tokens
-        # self.ps = PorterStemmer()
-        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', string)
-        for url in urls: string = string.replace(url,'')
-        punctuations = '''!”…“·–‘—|()-[]{};.:'"\,<>/?@#$%^&*_~''' #gives contol over what punctuation to retain  
-        for x in sentence.lower(): 
-            if x in punctuations: 
-                sentence = sentence.replace(x, "") 
-        # sentence = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', sentence) #remove urls
-        string = string.encode('ascii', 'ignore').decode('ascii') #better for removing non unicode characters
-        # string = ''.join(i for i in sentence if ord(i)<128) #remove non unicode characters
-        words = [word for word in word_tokenize(sentence) ] #### TODO Class importing pe load hoga kya, if word_tokenize is not imported
-        # for i in range(len(words)): words[i] = self.ps.stem(words[i])
+        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', sentence)
+        for url in urls: sentence = sentence.replace(url,'')
+        sentence = sentence.encode('ascii', 'ignore').decode('ascii') #better for removing non unicode characters
+        words = [word.lower() for word in word_tokenize(sentence)] 
         return words
 
     def text_target(self, dict_list): #takes in a list of dictionaries and returns the text target tupple
         data = []
         for i in range(len(dict_list)):
-            data.append([' '.join(w for w in self.tokenize(dict_list[i]['text'])), dict_list[i]['V'], dict_list[i]['A'], dict_list[i]['D']])    
+            tokens = self.tokenize(dict_list[i]['text'])
+            if len(tokens) > 0 :
+                data.append([' '.join([w for w in tokens]), dict_list[i]['V'], dict_list[i]['A'], dict_list[i]['D']])    
         return data
 
     def get_vocab(self, df):
