@@ -1,0 +1,170 @@
+1. Bold
+2. Useful
+3. Mighty
+4. Kind
+5. Self-satisfied
+6. Admired
+7. Proud
+8. Interested
+9. Arrogant
+10. Inspired
+I1. Excited
+12. Influential
+13. Aggressive
+14. Strong
+15. Dignified
+16. Powerful
+17. Elated
+I& Hopeful
+19. Triumphant
+20. Joyful
+2 I. Capable
+22. Lucky
+23. Responsible
+24. Friendly
+2.5. Masterful
+26. Free
+27. Devoted
+28. Domineering
+29. Aroused
+30. Concentrating
+31. Happy
+32. Egotistical
+33. Carefree
+34. Affectionate
+35. Vigorous
+36. Activated
+37. Alert
+38. Alone with responsibility
+39. Controlling
+40. Proud and lonely
+41. Enjoyment
+42. Serious
+43. Cooperative
+44. Thankful 
+45. Respectful 27
+46. Appreciative 27
+47. Loved 28
+48. Grateful 28
+49. In love -28
+50. Anxious 28
+Cl _ Impressed 28
+52. Surprised 29
+53. Sexually excited 29
+54. Wonder 30
+55. Fascinated 29
+56. Awed 30
+57. Overwhelmed 30
+58. Curious 28
+59. Relaxed 27
+60. Untroubled 27
+61. Modest 29
+62. Secure 29
+63. Nonchalant 30
+64. Aloof 30
+65. Leisurely 30
+66. Reserved 30
+67. Protected 27
+68. Consoled 27
+69. Quiet 27
+70. Sheltered 29
+71. Humble 28
+72. Solemn 29
+73. Reverent 28
+74. Astonished 30
+75. Disgusted 29
+76. Insolent 28
+77. Cruel 29
+78. Irritated 29
+79. Deliant 28
+80. Hate 28
+81. Hostile 29
+82. Angry 29
+83. Mildly annoyed 29
+84. Enraged 29
+8.5. Contempt 29
+86. Selfish 29
+87. Reprehensible 24
+88. Contemptuous 25
+89. Scornful 28
+90. Suspicious 29
+91. Skeptical 
+Burdened with responsibility
+93. Cold anger
+94. Hostile but controlled
+95. Crushed
+96. Frustrated
+97. Distressed
+98. Insecure
+99. Humiliated
+100. Hungry
+101. Fearful
+102. Terrified
+103. Embattled
+104. Helpless
+105. Troubled
+106. Startled
+107. Anguished
+108. Shamed
+109. Displeased
+1 IO. Embarrassed
+III. Upset
+112. Defeated
+113. Pain
+114. Quietly indignant
+115. Repentant
+116. Sinful
+117. Shy
+118. Guilty
+119. Weary with responsibility
+120. Angry but detached
+121. Confused
+122. Dissatisfied
+123. Regretful
+124. Tense
+125. Disdainful
+126. Depressed
+127. Despairing
+128. Lonely
+129. Meek
+130. Burdened
+131. Timid
+132. Bored
+133. Feeble
+134. Nauseated
+135. Inhibited
+136. Fatigued
+137. Rejected
+138. Subdued 
+139. Impotent
+140. Ennui
+141. Blase
+142. Haughty and lonely
+143. Listless
+144. Deactivated
+145. Weary
+146. Snobbish and lonely
+147. Uninterested
+148. Detached
+149. Discontented
+1.50. Discouraged
+151. Sad 
+
+anger: 93 disgust: 75 fear: 101 anxiety: 50 sadness: 151 happiness: 31 relaxation: 59 
+                    V       A       D
+ 93 anger       -0.43    0.67    0.34
+ 75 disgust     -0.60    0.35    0.11
+101 fear        -0.64    0.60   -0.43
+ 50 anxiety      0.01    0.59   -0.15
+151 sadness     -0.63   -0.27   -0.33 
+ 31 happiness    0.81    0.51    0.46
+ 59 relaxation   0.68   -0.46    0.06
+
+                V       A       D
+anger       2.14    4.34    3.68
+disgust     1.80    3.70    3.22
+fear        1.72    4.20    2.14
+anxiety     3.02    4.18    2.70 
+sadness     1.74    2.46    2.34
+happiness   4.62    4.02    3.92
+relaxation  4.36    2.08    3.12
