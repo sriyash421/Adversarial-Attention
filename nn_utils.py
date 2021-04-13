@@ -62,16 +62,16 @@ class EmotionRegression(nn.Module):
 # reg = EmotionRegression()(torch.cat((feat,feat), dim=1))
 # print("Reg: {}".format(reg.shape))
 
-class Discriminator(nn.Module):
-    def __init__(self, features_size=600):
-        super(Discriminator, self).__init__()
-        self.model = nn.Sequential(
-            nn.Linear(features_size, 1),
-            nn.Tanh()
-        )
+# class Discriminator(nn.Module):
+#     def __init__(self, features_size=600):
+#         super(Discriminator, self).__init__()
+#         self.model = nn.Sequential(
+#             nn.Linear(features_size, 1),
+#             nn.Tanh()
+#         )
 
-    def forward(self, x):
-        return self.model(x)
+#     def forward(self, x):
+#         return self.model(x)
 
 # p = Discriminator()(feat)
 # print("p: {}".format(p.shape))

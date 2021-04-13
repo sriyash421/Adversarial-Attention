@@ -57,20 +57,19 @@ class Dataset() :
         embeddings.weight.data.copy_(temp)
         return embeddings
 
+#     dataset = Dataset()
+#     vocab = dataset.get_vocab()
+#     train_dataset = dataset.read_data('./data/train.csv') 
+#     dev_dataset = dataset.read_data('./data/dev.csv')
+#     test_dataset = dataset.read_data('./data/test.csv')
 
-dataset = Dataset()
-vocab = dataset.get_vocab()
-train_dataset = dataset.read_data('./data/train.csv') 
-dev_dataset = dataset.read_data('./data/dev.csv')
-test_dataset = dataset.read_data('./data/test.csv')
+# temp = {
+#     'vocab' : vocab,
+#     'train_dataset': train_dataset,
+#     'dev_dataset': dev_dataset,
+#     'test_dataset': test_dataset
+# }
 
-temp = {
-    'vocab' : vocab,
-    'train_dataset': train_dataset,
-    'dev_dataset': dev_dataset,
-    'test_dataset': test_dataset
-}
-
-with open("dataset.pkl", "wb") as fout :
-    pickle.dump(temp, fout)
+# with open("dataset.pkl", "wb") as fout :
+#     pickle.dump(temp, fout)
         

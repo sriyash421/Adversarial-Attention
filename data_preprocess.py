@@ -2,6 +2,7 @@ import pandas as pd
 import gensim, pickle, nltk, re
 # from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize
+import string
 
 # nltk.download('punkt')
 class LoadData:
@@ -35,16 +36,16 @@ class LoadData:
 
     def tokenize(self, sentence): #tokenize a sentence supplied as a string and get list of tokens
         # self.ps = PorterStemmer()
-        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', string)
-        for url in urls: string = string.replace(url,'')
+        urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', sentence)
+        for url in urls: sentence = sentence.replace(url,'')
         punctuations = '''!”…“·–‘—|()-[]{};.:'"\,<>/?@#$%^&*_~''' #gives contol over what punctuation to retain  
         for x in sentence.lower(): 
             if x in punctuations: 
                 sentence = sentence.replace(x, "") 
         # sentence = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', sentence) #remove urls
-        string = string.encode('ascii', 'ignore').decode('ascii') #better for removing non unicode characters
+        sentence = sentence.encode('ascii', 'ignore').decode('ascii') #better for removing non unicode characters
         # string = ''.join(i for i in sentence if ord(i)<128) #remove non unicode characters
-        words = [word for word in word_tokenize(sentence) ] #### TODO Class importing pe load hoga kya, if word_tokenize is not imported
+        words = [word.lower() for word in word_tokenize(sentence) ] #### TODO Class importing pe load hoga kya, if word_tokenize is not imported
         # for i in range(len(words)): words[i] = self.ps.stem(words[i])
         return words
 
